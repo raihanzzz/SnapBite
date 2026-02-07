@@ -16,12 +16,14 @@ type CartItems = {
 }
 
 export interface IOrder extends mongoose.Document {
-    user: mongoose.Types.ObjectId,
-    restaurant: mongoose.Types.ObjectId,
-    deliveryDetails: DeliveryDetails,
-    cartItems: CartItems;
+    user: mongoose.Types.ObjectId;
+    restaurant: mongoose.Types.ObjectId;
+    deliveryDetails: DeliveryDetails;
+    cartItems: CartItems[];
     totalAmount: number;
-    status: "pending" | "confirmed" | "preparing" | "outfordelivery" | "delivered"
+    status: "pending" | "confirmed" | "preparing" | "outfordelivery" | "delivered";
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 const orderSchema = new mongoose.Schema<IOrder>({
