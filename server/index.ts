@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: "https://snapbite-hnzy.onrender.com",
   credentials: true
 }
 app.use(cors(corsOptions))

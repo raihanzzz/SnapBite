@@ -11,7 +11,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 //   restaurant:null
 //}
 
-const API_END_POINT = "http://localhost:8000/api/v1/restaurant";
+const API_END_POINT = "https://snapbite-hnzy.onrender.com/api/v1/restaurant";
 axios.defaults.withCredentials = true;
 
 
