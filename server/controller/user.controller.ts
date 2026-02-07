@@ -48,7 +48,7 @@ export const signup = async (req: Request, res: Response) => {
       verificationToken
     });
   } catch (error) {
-    console.error(error);
+    console.error('Signup controller error:', error);
     return res.status(500).json({ message: (error as any).message || "Internal server error" });
   }
 };

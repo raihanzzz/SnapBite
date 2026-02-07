@@ -9,6 +9,8 @@ import restaurantRoute from "./routes/restaurant.route";
 import menuRoute from "./routes/menu.route";
 import orderRoute from "./routes/order.route";
 import multer from "multer";
+import path from "path";
+
 import { Request, Response, NextFunction } from "express";
 
 import { stripeWebhook } from "./controller/order.controller";
@@ -19,6 +21,8 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+const DIRNAME = path.resolve();
+
 //default middleware for any mern project
 app.post("/api/v1/order/extension/webhook", express.raw({ type: "application/json" }), stripeWebhook);
 
@@ -28,7 +32,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "http://localhost:5174"],
   credentials: true
 }
 app.use(cors(corsOptions))
@@ -39,6 +43,10 @@ app.use("/api/v1/restaurant", restaurantRoute);
 app.use("/api/v1/menu", menuRoute);
 app.use("/api/v1/order", orderRoute);
 
+app.use(express.static(path.join(DIRNAME, "client/dist")));
+app.get(/(.*)/, (_, res) => {
+  res.sendFile(path.resolve(DIRNAME, "client", "dist", "index.html"));
+});
 
 //http://localhost:8000/api/v1/user/signup
 

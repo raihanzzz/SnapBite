@@ -56,6 +56,7 @@ export const useUserStore = create<UserState>()(persist((set) => ({
                 return response.data;
             }
         } catch (error: any) {
+            console.error('Signup error:', error);
             toast.error(error.response?.data?.message || "Signup failed");
             set({ loading: false });
         }
